@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinay Kumar | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="bg-animation-blob blob-one"></div>
+    <div class="bg-animation-blob blob-two"></div>
+    <div class="bg-animation-blob blob-three"></div>
+
+    <header class="site-header" id="mainHeader">
+        <nav class="navigation-bar">
+            <a href="#home" class="brand-logo">V<span>k</span></a>
+            <div class="nav-controls-wrapper">
+                <ul class="menu-items-list" id="navLinks">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                
+                <button class="theme-switcher-btn" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-btn" id="menuToggle" aria-label="Open Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-site-container">
+        
+        <!-- Hero Section -->
+        <section id="home" class="hero-section-box">
+            <div class="hero-content-area">
+                <h1>Hi, I'm <span>Vinay </span></h1>
+                <p>I am a <span id="typing-text"></span></p>
+                <div class="hero-cta-buttons">
+                    <a href="#projects" class="btn btn-glass-primary"><i class="fas fa-rocket"></i> View Projects</a>
+                    <a href="#contact" class="btn btn-glass-outline"><i class="fas fa-paper-plane"></i> Contact Me</a>
+                </div>
+            </div>
+            <div class="hero-visual-area">
+                <div class="profile-frame-wrapper">
+                    <img src="Me.jpeg" alt="Vinay Kumar Profile" id="profilePic">
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="content-card-box glass hover-lift">
+                <div class="inner-text-block">
+                    <h3>About Me</h3>
+                    <p>I hold a Bachelor of Science in Information Technology (B.Sc IT) from the University of Mumbai. I have a deep passion for modern software engineering, backend systems, and SAP enterprise solutions.</p>
+                    <p>My primary focus is on developing robust SAP ABAP Cloud applications, building custom business logic using CDS Views and RAP Model, and delivering scalable enterprise solutions.</p>
+                    
+                    <div class="highlights-grid-box">
+                        <div class="highlight-card-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h4>Education</h4>
+                            <p>B.Sc in Information Technology</p>
+                        </div>
+                        <div class="highlight-card-item">
+                            <i class="fas fa-laptop-code"></i>
+                            <h4>Specialization</h4>
+                            <p>Sap Abap Cloud</p>
+                        </div>
+                        <div class="highlight-card-item">
+                            <i class="fas fa-rocket"></i>
+                            <h4>Goal</h4>
+                            <p>Building Scalable Cloud Infrastructure</p>
+                        </div>
+                    </div>
+
+                    <div class="resume-btn-wrapper">
+                        <a href="#" download="Vinay_Kumar_Resume.pdf" class="btn btn-glass-primary glow-btn">
+                            <i class="fas fa-download"></i> Download Resume / CV
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <h2>Internship & Experience</h2>
+            <div class="content-card-box glass hover-lift">
+                <div class="inner-text-block">
+                    <div class="experience-header-row">
+                        <div>
+                            <h3>DevOps Intern</h3>
+                            <p class="company-title"><i class="fas fa-building"></i> Davine Technologies</p>
+                        </div>
+                        <span class="experience-badge-date"><i class="far fa-calendar-alt"></i> July 2026 - Present</span>
+                    </div>
+                    <p>Working hands-on with modern pipeline automation, containerization workflows, and cloud infrastructure management to ensure high availability and robust system security.</p>
+                    
+                    <div class="highlights-grid-box">
+                        <div class="highlight-card-item">
+                            <i class="fas fa-cogs"></i>
+                            <h4>Automation & CI/CD</h4>
+                            <p>Design and automation of deployment pipelines.</p>
+                        </div>
+                        <div class="highlight-card-item">
+                            <i class="fas fa-cloud"></i>
+                            <h4>Cloud Infrastructure</h4>
+                            <p>Supporting scalability and high availability.</p>
+                        </div>
+                        <div class="highlight-card-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>System Reliability</h4>
+                            <p>Troubleshooting and optimizing performance workflows.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Skills Section -->
+        <section id="skills">
+            <h2>My Technical Skills</h2>
+            <div class="skills-wrapper-grid">
+                <div class="skill-category-card glass hover-lift">
+                    <h3><i class="fas fa-code"></i> Software & Backend</h3>
+                    <div class="skill-bars-stack">
+                        <div class="single-skill-bar">
+                            <div class="skill-meta-info">
+                                <span>Java (Core & OOPs)</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-track-bg">
+                                <div class="progress-fill-bar" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="single-skill-bar">
+                            <div class="skill-meta-info">
+                                <span>HTML5 / CSS3 / JavaScript</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="progress-track-bg">
+                                <div class="progress-fill-bar" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div class="single-skill-bar">
+                            <div class="skill-meta-info">
+                                <span>SQL & Database Management</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-track-bg">
+                                <div class="progress-fill-bar" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category-card glass hover-lift">
+                    <h3><i class="fas fa-cubes"></i> SAP ABAP Cloud Development</h3>
+                    <div class="skill-bars-stack">
+                        <div class="single-skill-bar">
+                            <div class="skill-meta-info">
+                                <span>ABAP Core & OOPs</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-track-bg">
+                                <div class="progress-fill-bar" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="single-skill-bar">
+                            <div class="skill-meta-info">
+                                <span>Core Data Services (CDS Views)</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="progress-track-bg">
+                                <div class="progress-fill-bar" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div class="single-skill-bar">
+                            <div class="skill-meta-info">
+                                <span>ABAP RESTful Application Programming (RAP)</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-track-bg">
+                                <div class="progress-fill-bar" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        <div class="single-skill-bar">
+                            <div class="skill-meta-info">
+                                <span>SAP BTP (Business Technology Platform)</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="progress-track-bg">
+                                <div class="progress-fill-bar" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category-card glass hover-lift">
+                    <h3><i class="fas fa-server"></i> DevOps & Cloud</h3>
+                    <div class="skill-bars-stack">
+                        <div class="single-skill-bar">
+                            <div class="skill-meta-info">
+                                <span>CI/CD Pipelines & Automation</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="progress-track-bg">
+                                <div class="progress-fill-bar" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div class="single-skill-bar">
+                            <div class="skill-meta-info">
+                                <span>Docker & Containerization</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-track-bg">
+                                <div class="progress-fill-bar" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        <div class="single-skill-bar">
+                            <div class="skill-meta-info">
+                                <span>Cloud Infrastructure Management</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-track-bg">
+                                <div class="progress-fill-bar" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        <div class="single-skill-bar">
+                            <div class="skill-meta-info">
+                                <span>Git & Version Control</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-track-bg">
+                                <div class="progress-fill-bar" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services">
+            <h2>Services I Offer</h2>
+            <div class="services-wrapper-grid">
+                <div class="service-box-card glass hover-lift">
+                    <div class="service-icon-box"><i class="fas fa-code-branch"></i></div>
+                    <h3>Web Development</h3>
+                    <p>Building high-speed, dynamic web applications using modern JavaScript, HTML5/CSS3, and fluid Glassmorphism interfaces.</p>
+                </div>
+                <div class="service-box-card glass hover-lift">
+                    <div class="service-icon-box"><i class="fas fa-network-wired"></i></div>
+                    <h3>DevOps & Cloud Automation</h3>
+                    <p>Provisioning deployment pipelines (CI/CD), managing infrastructure, and containerizing applications with Docker.</p>
+                </div>
+                <div class="service-box-card glass hover-lift">
+                    <div class="service-icon-box"><i class="fas fa-database"></i></div>
+                    <h3>Database Administration</h3>
+                    <p>Creating efficient relational database schemas, complex SQL query management, and data security optimization.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2>My Projects</h2>
+            <div class="projects-wrapper-grid" style="margin-bottom: 2.2rem;">
+                <div class="project-item-card glass hover-lift">
+                    <div class="project-thumb-box">
+                        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&auto=format&fit=crop&q=8" alt="Banking System">
+                    </div>
+                    <div class="project-details-box">
+                        <h3>Banking System</h3>
+                        <p>A core for deposits, withdrawals, and automatic interest calculation.</p>
+                        <div class="project-tech-tags">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="project-actions-row">
+                            <a href="bank.html" class="btn btn-sm btn-glass-outline"><i class="fas fa-play-circle"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-item-card glass hover-lift">
+                    <div class="project-thumb-box">
+                        <img src="https://plus.unsplash.com/premium_photo-1724800663657-3e57bf4f622c?q=80&w=726&auto=format&fit=crop" alt="Digital Calculator">
+                    </div>
+                    <div class="project-details-box">
+                        <h3>Digital Calculator</h3>
+                        <p>An interactive calculator web app with floating-point calculations, calculation history, and smooth keypress effects in glass UI.</p>
+                        <div class="project-tech-tags">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="project-actions-row">
+                            <a href="calculator.html" class="btn btn-sm btn-glass-outline"><i class="fas fa-play-circle"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-item-card glass hover-lift">
+                    <div class="project-thumb-box">
+                        <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=600&auto=format&fit=crop&q=80" alt="Library Management System">
+                    </div>
+                    <div class="project-details-box">
+                        <h3>Library Management System</h3>
+                        <p>A full-stack web application with complete CRUD functionality, administrative panels, and book availability tracking.</p>
+                        <div class="project-tech-tags">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="project-actions-row">
+                            <a href="library.html" class="btn btn-sm btn-glass-outline"><i class="fas fa-play-circle"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-item-card glass hover-lift">
+                    <div class="project-thumb-box">
+                        <img src="https://images.pexels.com/photos/7103/writing-notes-idea-conference.jpg?auto=compress&w=1260&h=750&dpr=1" alt="Notes App">
+                    </div>
+                     <div class="project-details-box">
+                        <h3>Notes App</h3>
+                        <p>A responsive notes manager application with local storage support, enabling users to create, edit, and organize daily notes efficiently.</p>
+                        <div class="project-tech-tags">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="project-actions-row">
+                            <a href="notes.html" class="btn btn-sm btn-glass-outline"><i class="fas fa-play-circle"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-item-card glass hover-lift">
+                    <div class="project-thumb-box">
+                        <img src="https://mitraweb.in/blogs/wp-content/uploads/2022/05/Farming.jpg" alt="Farmer Land Record">
+                    </div>
+                    <div class="project-details-box">
+                        <h3>Farmer Land Record</h3>
+                        <p>An agricultural land registry interface designed to manage plot data, ownership details, and verification criteria smoothly.</p>
+                        <div class="project-tech-tags">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="project-actions-row">
+                            <a href="farmer.html" class="btn btn-sm btn-glass-outline"><i class="fas fa-play-circle"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-item-card glass hover-lift">
+                    <div class="project-thumb-box">
+                        <img src="https://media.istockphoto.com/id/1443246502/photo/rock-paper-scissors-hand-game-in-nature.jpg?s=612x612&w=0&k=20&c=32pjUNWm8D0WwPH90sCFYPKxeiyO2l0V25PAmuaCKKg=" alt="To-Do List">
+                    </div>
+                    <div class="project-details-box">
+                        <h3>Rock, Paper, Scissor</h3>
+                        <p>Stone paper scissors is a quick hand game where two players make one of three shapes at the same time.</p>
+                        <div class="project-tech-tags">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="project-actions-row">
+                            <a href="game.html" class="btn btn-sm btn-glass-outline"><i class="fas fa-play-circle"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <div class="contact-layout-grid">
+                <div class="contact-info-card glass hover-lift">
+                    <h3>Contact Information</h3>
+                    <p style="margin-bottom: 1.5rem;">Feel free to reach out via email or interact with my social channels and live location map below.</p>
+                    <h4>Direct Email</h4>
+                    <p style="font-size:0.9rem; opacity:0.9; margin-bottom:1.5rem;"><i class="fas fa-envelope" style="color:var(--primary-color)"></i> vinaykumarkeshavrampal21@gmail.com</p>
+                    <h4>Social Connections</h4>
+                    <div class="social-links-row">
+                        <a href="https://www.linkedin.com/in/vinay-kumar-pal-717422367" target="_blank" class="social-btn linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com" target="_blank" class="social-btn github" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.instagram.com/vinayakkk.21?igsh=MW81MHc1NG1zMDBzcg==" target="_blank" class="social-btn instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com" target="_blank" class="social-btn youtube" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://wa.me/919120656386" target="_blank" class="social-btn whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                    <h4>Our Location (Thane City)</h4>
+                    <div class="map-embed-frame">
+                        <iframe 
+                            id="googleMapHeader"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120612.39414594247!2d72.81232491295286!3d19.0357069818817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="contact-form-card glass hover-lift">
+                    <h3>Send a Direct Email</h3>
+                    <form action="https://formspree.io/f/maqrvqjp" method="POST">
+                        <div class="form-input-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter your name">
+                        </div>
+                        <div class="form-input-group">
+                            <label for="email">Your Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-input-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" class="fixed-message-box" required placeholder="Type your message here..."></textarea>
+                        </div>
+                        <input type="hidden" name="_to" value="vinaykumarkeshavrampal21@gmail.com">
+                        <input type="text" name="_gotcha" style="display:none">
+                        <button type="submit" class="btn btn-glass-primary">Send Secure Message</button>
+                        
+                        <div id="formSuccessMessage" style="display: none;" class="form-alert-msg form-message-success">
+                            <i class="fas fa-check-circle"></i> Message successfully submitted! Thank you for reaching out.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+<!-- Footer Section -->
+<footer class="site-footer">
+    <div class="main-site-container footer-inner-wrap">
+        <div class="footer-divider-row">
+            <div class="copyright-text-box">
+                <p>&copy; 2026 <strong>Vinay Kumar Pal</strong>. All Rights Reserved.</p>
+                <span class="footer-tagline">Designed & Developed with Passion.</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Banking & Loan OOPs Simulator | Vinay Kumar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="bank.css">
+</head>
+<body>
+
+    <!-- Header & Navbar -->
+    <header id="mainHeader">
+        <nav class="navbar">
+            <a href="index.html#home" class="logo"><i class="fas fa-university" style="color: var(--accent-yellow);"></i> JavaBanking<span>OOPs</span></a>
+            <div class="nav-container-right">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html#home"><i class="fas fa-home"></i> Portfolio Home</a></li>
+                    <li><a href="index.html#projects"><i class="fas fa-arrow-left"></i> Back to Projects</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                <button class="menu-toggle" id="menuToggle" aria-label="Open Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-content-wrapper">
+        <div class="container-box">
+            
+            <h1 style="color: var(--accent-yellow); margin-bottom: 0.3rem; font-size: 1.8rem; text-shadow: 0 0 20px rgba(250, 204, 21, 0.2);">Java Banking & Financial Ecosystem</h1>
+            <p style="font-size: 0.85rem; opacity: 0.85; margin-bottom: 1.5rem;">Advanced Polymorphic Transactions, Encapsulated Account State, and Real-Time Loan EMI Amortization.</p>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('banking', event)"><i class="fas fa-university"></i> Core Banking Simulator</button>
+                <button class="tab-btn" onclick="switchTab('emi', event)"><i class="fas fa-calculator"></i> Loan & EMI Calculator</button>
+            </div>
+
+            <!-- Tab 1: Banking Simulator -->
+            <div id="bankingTab" class="tab-content active">
+                <div class="bank-grid">
+                    <div class="control-panel">
+                        <div class="input-group">
+                            <label>Account Holder Name</label>
+                            <input type="text" id="accName" class="bank-input" value="Vinay Kumar" readonly>
+                        </div>
+                        <div class="input-group">
+                            <label>Account Type (Polymorphic Class)</label>
+                            <select id="accType" class="bank-select" onchange="changeAccountType()">
+                                <option value="Savings">SavingsAccount (Min Bal ₹1,000 | 4% Interest)</option>
+                                <option value="Current">CurrentAccount (Overdraft Limit ₹50,000)</option>
+                                <option value="Salary">SalaryAccount (Zero Balance | Auto-Freeze)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Transaction Amount (INR)</label>
+                            <input type="number" id="amount" class="bank-input" placeholder="e.g. 5000">
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 0.3rem;">
+                            <button class="btn-custom" onclick="deposit()"><i class="fas fa-wallet"></i> Deposit</button>
+                            <button class="btn-blue" onclick="withdraw()"><i class="fas fa-hand-holding-usd"></i> Withdraw</button>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;">
+                            <button class="btn-outline" onclick="checkBalance()"><i class="fas fa-coins"></i> Balance</button>
+                            <button class="btn-outline" onclick="applyInterest()" id="interestBtn"><i class="fas fa-percent"></i> Add Interest</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bank-console" id="consoleOutput">
+                            <div class="console-line">[JVM Execution Started: BankingSystem.class]</div>
+                            <div class="console-line console-success">SavingsAccount account = new SavingsAccount("Vinay Kumar", 5000.0);</div>
+                            <div class="console-line" style="color: var(--accent-yellow);">[Encapsulation Active: private double balance]</div>
+                            <div class="console-line">[Polymorphism Enabled: dynamic method dispatch ready]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: EMI Calculator -->
+            <div id="emiTab" class="tab-content">
+                <div class="emi-grid">
+                    <div class="control-panel">
+                        <div class="input-group">
+                            <label>Loan Type</label>
+                            <select id="loanType" class="bank-select" onchange="updateLoanDefaults()">
+                                <option value="Home">Home Loan (Interest: 8.5% p.a.)</option>
+                                <option value="Car">Car Loan (Interest: 9.0% p.a.)</option>
+                                <option value="Personal">Personal Loan (Interest: 11.5% p.a.)</option>
+                                <option value="Education">Education Loan (Interest: 7.5% p.a.)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Loan Amount (₹)</label>
+                            <input type="number" id="loanAmount" class="bank-input" value="1000000" oninput="calculateEMI()">
+                        </div>
+                        <div class="input-group">
+                            <label>Interest Rate (% P.A.)</label>
+                            <input type="number" id="interestRate" class="bank-input" value="8.5" step="0.1" oninput="calculateEMI()">
+                        </div>
+                        <div class="input-group">
+                            <label>Loan Tenure (Years)</label>
+                            <input type="number" id="loanTenure" class="bank-input" value="15" oninput="calculateEMI()">
+                        </div>
+                        <button class="btn-custom" onclick="calculateEMI()"><i class="fas fa-calculator"></i> Compute Amortization</button>
+                    </div>
+                    <div class="emi-result-card">
+                        <h3 style="color: var(--accent-yellow); font-size: 1.1rem; margin-bottom: 0.5rem;"><i class="fas fa-chart-pie"></i> Loan Amortization Summary</h3>
+                        <div class="emi-stat">
+                            <span>Monthly EMI</span>
+                            <span id="resEmi" style="color: #10b981;">₹0</span>
+                        </div>
+                        <div class="emi-stat">
+                            <span>Principal Amount</span>
+                            <span id="resPrincipal" style="color: var(--primary-color);">₹0</span>
+                        </div>
+                        <div class="emi-stat">
+                            <span>Total Interest Payable</span>
+                            <span id="resInterest" style="color: #ef4444;">₹0</span>
+                        </div>
+                        <div class="emi-stat" style="border-bottom: none;">
+                            <span>Total Payment (P + Interest)</span>
+                            <span id="resTotal" style="color: var(--accent-yellow);">₹0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-glass">
+        <div class="footer-bottom">
+            <p>&copy; 2026 <strong>Vinay Kumar Pal</strong>. All Rights Reserved.</p>
+            <span style="opacity: 0.7; font-size: 0.8rem;">Java OOPs Banking & Financial Simulator v2.5</span>
+        </div>
+    </footer>
+
+    <script src="bank.js"></script>
+</body>
+</html>

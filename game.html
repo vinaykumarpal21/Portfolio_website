@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Stone Paper Scissors | Vinay Kumar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+
+    <!-- Header & Navbar -->
+    <header id="mainHeader">
+        <nav class="navbar">
+            <a href="index.html#home" class="logo"><i class="fas fa-gamepad" style="color: var(--accent-yellow);"></i> Battle<span>Arena</span></a>
+            <div class="nav-container-right">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html#home"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="index.html#projects"><i class="fas fa-arrow-left"></i> Back to Projects</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                <button class="menu-toggle" id="menuToggle" aria-label="Open Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Game Workspace -->
+    <div class="game-content-wrapper">
+        <div class="game-container">
+            <h1>🎮 Real Battle Arena</h1>
+            
+            <!-- User and Computer Profiles -->
+            <div class="profiles-section">
+                <div class="profile-card">
+                    <h3>👤 Player (Aap)</h3>
+                    <div class="score-val" id="user-score">0</div>
+                </div>
+                <div class="profile-card">
+                    <h3>🤖 Bot (Computer)</h3>
+                    <div class="score-val" id="comp-score">0</div>
+                </div>
+            </div>
+
+            <!-- Live Battle Choices Visualizer -->
+            <div class="battle-screen">
+                <div>Aapka Move: <br><span id="user-display">-</span></div>
+                <div>VS</div>
+                <div>Bot Move: <br><span id="comp-display">-</span></div>
+            </div>
+
+            <!-- Buttons for Action -->
+            <div class="choices">
+                <button class="choice-btn" onclick="playGame('Stone')">🧱 Stone</button>
+                <button class="choice-btn" onclick="playGame('Paper')">📄 Paper</button>
+                <button class="choice-btn" onclick="playGame('Scissors')">✂️ Scissors</button>
+            </div>
+
+            <!-- Status Message Box -->
+            <div class="msg-box">
+                <p id="game-msg">Game shuru karne ke liye upar diye gaye button par click karein!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-glass">
+        <div class="footer-bottom">
+            <p>&copy; 2026 <strong>Vinay Kumar Pal</strong>. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="game.js"></script>
+</body>
+</html>
