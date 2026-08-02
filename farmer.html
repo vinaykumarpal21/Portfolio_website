@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India BhuNaksha Portal | Vinay Kumar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS & JS for fully working interactive Map of India -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link rel="stylesheet" href="farmer.css">
+</head>
+<body>
+
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <!-- Header & Navbar -->
+    <header id="mainHeader">
+        <nav class="navbar">
+            <a href="index.html" class="logo"><i class="fas fa-seedling" style="color: var(--golden-color);"></i> BhuNaksha<span>India</span></a>
+            <div class="nav-container-right">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html"><i class="fas fa-arrow-left"></i> Back to Project</a></li>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="menu-toggle" id="menuToggle" aria-label="Open Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        
+        <div class="page-header" style="justify-content: flex-start;">
+            <h1>All India <span>BhuNaksha</span></h1>
+        </div>
+
+        <!-- Live Interactive Map & Inspector Section -->
+        <div class="map-single-section">
+            
+            <!-- Left: Live Map Card -->
+            <div class="card-box glass hover-lift">
+                <h2><i class="fas fa-map-marked-alt" style="color: var(--golden-color);"></i> Live India Map</h2>
+                <div id="leafletIndiaMap"></div>
+            </div>
+
+            <!-- Right: State / UT Inspector Panel -->
+            <div class="card-box state-inspector glass hover-lift">
+                <h2><i class="fas fa-landmark"></i> Regional Gateway & Leadership</h2>
+                
+                <!-- Dynamic City Image Card -->
+                <div class="region-preview-card" id="regionCardContainer">
+                    <img id="regionCityImg" src="https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=600&q=80" alt="Capital City View">
+                    <div class="region-img-overlay">
+                        <div>
+                            <strong id="overlayCityName" style="font-size: 0.9rem; display: block; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Lucknow</strong>
+                            <span id="overlayRegionType" style="font-size: 0.68rem;">Uttar Pradesh</span>
+                        </div>
+                        <span id="overlayBadge">State</span>
+                    </div>
+                </div>
+
+                <!-- Leader Profile Box -->
+                <div class="cm-profile-box">
+                    <img id="cmAvatarImg" class="cm-avatar" src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Yogi_Adityanath_2017_%28cropped%29.jpg" alt="Leader">
+                    <div class="cm-details">
+                        <span id="cmRoleLabel">Chief Minister</span>
+                        <h4 id="cmNameText">Yogi Adityanath</h4>
+                        <p id="cmTitleText">Chief Minister, Uttar Pradesh</p>
+                    </div>
+                </div>
+
+                <div class="selected-state-banner">
+                    <div>
+                        <span id="regionTypeLabel" style="font-size: 0.68rem; opacity: 0.8; display: block;">Selected State / UT</span>
+                        <strong id="activeStateName" style="font-size: 1rem; color: var(--golden-color);">Uttar Pradesh</strong>
+                    </div>
+                    <i class="fas fa-map-pin" style="font-size: 1.2rem; color: var(--primary-color);"></i>
+                </div>
+
+                <div class="state-info-list">
+                    <div class="state-info-item">
+                        <span>Capital:</span>
+                        <strong id="capitalCityName">Lucknow</strong>
+                    </div>
+                    <div class="state-info-item">
+                        <span>Portal:</span>
+                        <strong id="portalName" style="font-size: 0.8rem;">UP BhuNaksha Portal</strong>
+                    </div>
+                    <div class="state-info-item">
+                        <span>Status:</span>
+                        <span style="color: var(--success-color); font-weight: 600;"><i class="fas fa-check-circle"></i> Live & Accessible</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 0.8rem; flex-direction: column;">
+                    <a id="bhunakshaDirectLink" href="https://upbhunaksha.gov.in" target="_blank" class="btn btn-primary" style="text-align: center; text-decoration: none;"><i class="fas fa-external-link-alt"></i> Open Official Portal</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-glass">
+        <div class="footer-bottom">
+            <p>&copy; 2026 <strong>Vinay Kumar Pal</strong>. All Rights Reserved.</p>
+            <span style="opacity: 0.7; font-size: 0.8rem;">Pan-India States & Union Territories Mapping System</span>
+        </div>
+    </footer>
+
+    <script src="farmer.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Glass Calculator | Vinay Kumar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="calculator.css">
+</head>
+<body>
+
+    <!-- Header & Navbar -->
+    <header id="mainHeader">
+        <nav class="navbar">
+            <a href="index.html#home" class="logo"><i class="fas fa-calculator" style="color: var(--accent-yellow);"></i> Glass<span>Calc</span></a>
+            <div class="nav-container-right">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html#home"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="index.html#projects"><i class="fas fa-arrow-left"></i> Back to Projects</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                <button class="menu-toggle" id="menuToggle" aria-label="Open Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Calculator Workspace -->
+    <div class="calc-content-wrapper">
+        <div class="calculator">
+            <input type="text" class="display" id="screen" readonly value="0">
+            <div class="buttons">
+                <button class="calc-btn clear" onclick="clearScreen()">C</button>
+                <button onclick="append('/')" class="calc-btn operator">/</button>
+                <button onclick="append('*')" class="calc-btn operator">*</button>
+                <button onclick="backspace()" class="calc-btn"><i class="fas fa-backspace"></i></button>
+                
+                <button onclick="append('7')" class="calc-btn">7</button>
+                <button onclick="append('8')" class="calc-btn">8</button>
+                <button onclick="append('9')" class="calc-btn">9</button>
+                <button onclick="append('-')" class="calc-btn operator">-</button>
+                
+                <button onclick="append('4')" class="calc-btn">4</button>
+                <button onclick="append('5')" class="calc-btn">5</button>
+                <button onclick="append('6')" class="calc-btn">6</button>
+                <button onclick="append('+')" class="calc-btn operator">+</button>
+                
+                <button onclick="append('1')" class="calc-btn">1</button>
+                <button onclick="append('2')" class="calc-btn">2</button>
+                <button onclick="append('3')" class="calc-btn">3</button>
+                <button onclick="calculate()" class="calc-btn" style="grid-row: span 2; height: 120px; background: var(--accent-yellow); color: #070d19; font-weight: 700;">=</button>
+                
+                <button onclick="append('0')" class="calc-btn" style="grid-column: span 2;">0</button>
+                <button onclick="append('.')" class="calc-btn">.</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-glass">
+        <div class="footer-bottom">
+            <p>&copy; 2026 <strong>Vinay Kumar Pal</strong>. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="calculator.js"></script>
+</body>
+</html>
