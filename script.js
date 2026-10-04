@@ -1,147 +1,135 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const root = document.documentElement;
+  const themeBtn = document.getElementById('themeToggle');
+  const menuBtn = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
 
-    // 1. MOBILE MENU TOGGLE
-    const menuToggle = document.getElementById('menuToggle');
-    const navMenu    = document.getElementById('navMenu');
-
-    if (menuToggle && navMenu) {
-        menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navMenu.classList.toggle('active');
-            const icon = menuToggle.querySelector('i');
-            if (navMenu.classList.contains('active')) {
-                icon.classList.replace('fa-bars-staggered', 'fa-times');
-            } else {
-                icon.classList.replace('fa-times', 'fa-bars-staggered');
-            }
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-                navMenu.classList.remove('active');
-                const icon = menuToggle.querySelector('i');
-                if (icon) icon.classList.replace('fa-times', 'fa-bars-staggered');
-            }
-        });
-
-        navMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                const icon = menuToggle.querySelector('i');
-                if (icon) icon.classList.replace('fa-times', 'fa-bars-staggered');
-            });
-        });
+  // Theme: set data-theme on <html>, matching the CSS variables.
+  const setTheme = (theme) => {
+    root.setAttribute('data-theme', theme);
+    try { localStorage.setItem('theme', theme); } catch (_) {}
+    if (themeBtn) {
+      themeBtn.innerHTML = theme === 'dark'
+        ? '<i class="fa-solid fa-sun" aria-hidden="true"></i>'
+        : '<i class="fa-solid fa-moon" aria-hidden="true"></i>';
+      themeBtn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      themeBtn.title = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
     }
+  };
+  let savedTheme = 'light';
+  try { savedTheme = localStorage.getItem('theme') || 'light'; } catch (_) {}
+  setTheme(savedTheme === 'dark' ? 'dark' : 'light');
+  themeBtn?.addEventListener('click', () => {
+    setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
 
-    // 2. THEME TOGGLE (Light / Dark)
-    const themeToggle = document.getElementById('themeToggle');
-    const htmlElement = document.documentElement;
-
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) htmlElement.setAttribute('data-theme', savedTheme);
-
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            if (htmlElement.getAttribute('data-theme') === 'dark') {
-                htmlElement.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-            } else {
-                htmlElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        });
+  // Mobile menu
+  const closeMenu = () => {
+    navMenu?.classList.remove('active');
+    menuBtn?.setAttribute('aria-expanded', 'false');
+    const icon = menuBtn?.querySelector('i');
+    if (icon) {
+      icon.classList.remove('fa-xmark');
+      icon.classList.add('fa-bars-staggered');
     }
-
-    // 3. TYPING EFFECT
-    if (document.getElementById('typing-text')) {
-        new Typed('#typing-text', {
-            strings: ['DevOps Engineer', 'CI/CD Pipeline Specialist', 'B.Sc IT Graduate'],
-            typeSpeed: 60,
-            backSpeed: 40,
-            backDelay: 1500,
-            loop: true
-        });
+  };
+  menuBtn?.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const opening = !navMenu?.classList.contains('active');
+    navMenu?.classList.toggle('active', opening);
+    menuBtn.setAttribute('aria-expanded', String(opening));
+    const icon = menuBtn.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('fa-xmark', opening);
+      icon.classList.toggle('fa-bars-staggered', !opening);
     }
+  });
+  document.addEventListener('click', (event) => {
+    if (navMenu && menuBtn && !navMenu.contains(event.target) && !menuBtn.contains(event.target)) closeMenu();
+  });
+  navMenu?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { closeMenu(); closeModal(); } });
 
-    // 4. PROJECT CAROUSEL
-    const projectCards = document.querySelectorAll('.project-card');
-    const prevProjBtn  = document.getElementById('prevProjBtn');
-    const nextProjBtn  = document.getElementById('nextProjBtn');
-    const projCounter  = document.getElementById('projCounter');
-    let currentIndex   = 0;
-    const total        = projectCards.length;
-
-    function updateCarousel() {
-        projectCards.forEach((card, i) => card.classList.toggle('active', i === currentIndex));
-        if (projCounter) projCounter.textContent = `${currentIndex + 1} / ${total}`;
-    }
-
-    if (nextProjBtn && prevProjBtn) {
-        nextProjBtn.addEventListener('click', () => { currentIndex = (currentIndex + 1) % total; updateCarousel(); });
-        prevProjBtn.addEventListener('click', () => { currentIndex = (currentIndex - 1 + total) % total; updateCarousel(); });
-    }
-
-    // 5. PROJECT DETAILS MODAL
-    const detailsModal   = document.getElementById('detailsModal');
-    const modalBody      = document.getElementById('modalBodyContent');
-    const closeModalBtn  = document.getElementById('closeModalBtn');
-
-    function openModal(title, desc, tech) {
-        if (modalBody) {
-            modalBody.innerHTML = `
-                <h3 style="margin-bottom:0.8rem;font-size:1.3rem;color:var(--primary-color);">${title}</h3>
-                <p style="margin-bottom:1rem;font-size:0.95rem;line-height:1.5;opacity:0.9;">${desc}</p>
-                <h4 style="font-size:0.95rem;margin-bottom:0.4rem;color:var(--text-color);">Technologies Used:</h4>
-                <p style="font-size:0.9rem;opacity:0.85;background:var(--border-color);padding:6px 10px;border-radius:6px;display:inline-block;">${tech}</p>
-            `;
-        }
-        if (detailsModal) detailsModal.classList.add('active');
-    }
-
-    function closeModal() {
-        if (detailsModal) detailsModal.classList.remove('active');
-    }
-
-    document.querySelectorAll('.view-details').forEach((btn, i) => {
-        btn.addEventListener('click', () => {
-            const card = projectCards[i];
-            if (card) openModal(
-                card.getAttribute('data-title'),
-                card.getAttribute('data-desc'),
-                card.getAttribute('data-tech')
-            );
-        });
+  // Project carousel uses the actual IDs present in index.html.
+  const projectCards = [...document.querySelectorAll('.project-card')];
+  const prevBtn = document.getElementById('prevProjBtn');
+  const nextBtn = document.getElementById('nextProjBtn');
+  const counter = document.getElementById('projCounter');
+  let currentIndex = Math.max(0, projectCards.findIndex(card => card.classList.contains('active')));
+  const showProject = (index) => {
+    if (!projectCards.length) return;
+    currentIndex = (index + projectCards.length) % projectCards.length;
+    projectCards.forEach((card, i) => {
+      card.classList.toggle('active', i === currentIndex);
+      card.setAttribute('aria-hidden', String(i !== currentIndex));
     });
+    if (counter) counter.textContent = `${currentIndex + 1} / ${projectCards.length}`;
+  };
+  prevBtn?.addEventListener('click', () => showProject(currentIndex - 1));
+  nextBtn?.addEventListener('click', () => showProject(currentIndex + 1));
+  showProject(currentIndex);
 
-    if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-    if (detailsModal)  detailsModal.addEventListener('click', (e) => { if (e.target === detailsModal) closeModal(); });
-
-    // 6. CONTACT FORM — Formspree AJAX
-    const contactForm = document.querySelector('form');
-    const successMsg  = document.getElementById('formSuccessMessage');
-
-    if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            try {
-                const res = await fetch(contactForm.action, {
-                    method: 'POST',
-                    body: new FormData(contactForm),
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (res.ok) {
-                    contactForm.reset();
-                    if (successMsg) {
-                        successMsg.style.display = 'block';
-                        setTimeout(() => { successMsg.style.display = 'none'; }, 4000);
-                    }
-                } else {
-                    alert('Oops! There was a problem submitting your form.');
-                }
-            } catch {
-                alert('Network error. Please check your connection and try again.');
-            }
-        });
+  // Project details modal
+  const modal = document.getElementById('detailsModal');
+  const modalBody = document.getElementById('modalBodyContent');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  function openModal(card) {
+    if (!modal || !modalBody || !card) return;
+    const title = card.dataset.title || card.querySelector('h3')?.textContent || 'Project details';
+    const description = card.dataset.desc || card.querySelector('.project-info p')?.textContent || '';
+    const tech = (card.dataset.tech || '').split(',').map(s => s.trim()).filter(Boolean);
+    modalBody.replaceChildren();
+    const heading = document.createElement('h2'); heading.textContent = title;
+    const paragraph = document.createElement('p'); paragraph.textContent = description;
+    modalBody.append(heading, paragraph);
+    if (tech.length) {
+      const techHeading = document.createElement('h3'); techHeading.textContent = 'Technologies Used';
+      const list = document.createElement('div'); list.className = 'tech-tags';
+      tech.forEach(name => { const tag = document.createElement('span'); tag.textContent = name; list.append(tag); });
+      modalBody.append(techHeading, list);
     }
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    closeModalBtn?.focus();
+  }
+  function closeModal() {
+    modal?.classList.remove('active');
+    modal?.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+  }
+  document.querySelectorAll('.view-details').forEach(button => {
+    button.addEventListener('click', () => openModal(button.closest('.project-card')));
+  });
+  closeModalBtn?.addEventListener('click', closeModal);
+  modal?.addEventListener('click', event => { if (event.target === modal) closeModal(); });
 
+  // Reliable typewriter animation; does not depend on an external CDN.
+  const typingTarget = document.getElementById('typing-text');
+  if (typingTarget) {
+    const phrases = ['DevOps Engineer', 'Cloud & AWS Enthusiast', 'CI/CD Automation Learner'];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+    const typeNext = () => {
+      const phrase = phrases[phraseIndex];
+      typingTarget.textContent = phrase.slice(0, charIndex);
+      let delay = deleting ? 45 : 85;
+      if (!deleting && charIndex < phrase.length) {
+        charIndex++;
+      } else if (deleting && charIndex > 0) {
+        charIndex--;
+      } else if (!deleting) {
+        deleting = true;
+        delay = 1400;
+      } else {
+        deleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        delay = 350;
+      }
+      window.setTimeout(typeNext, delay);
+    };
+    typingTarget.textContent = '';
+    typeNext();
+  }
 });
