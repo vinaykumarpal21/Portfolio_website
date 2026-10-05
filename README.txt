@@ -1,18 +1,16 @@
-VINAY KUMAR PAL - PORTFOLIO FIX
+VINAY KUMAR PAL - PORTFOLIO
 
-Files:
-- index.html
-- style.css
-- script.js
+Files: index.html, style.css, script.js, Me.jpg, images/ (project illustrations), Resume_Vinay_D.pdf (add yours)
 
-Important fixes:
-1. HTML now loads script.js (previous HTML loaded script_2.js, not the uploaded script).
-2. Project slider controls now use actual IDs prevProjBtn and nextProjBtn.
-3. Theme toggle stores preference and updates data-theme on the html element.
-4. Mobile menu open/close, outside click, Escape, and navigation link close behavior.
-5. Project Details buttons open a working modal.
-6. Typing animation has a fallback if the Typed.js CDN is unavailable.
+Edit content in script.js:
+- SKILL_GROUPS : skills (name + icon only, duplicates auto-removed)
+- PROJECTS     : title, summary, details, tags, tool icons, image, repo link
+- TYPING_PHRASES : hero typing text
+Replace each project's repo URL (currently https://github.com) with the real repository.
 
-Run:
-Keep index.html, style.css, script.js, Me.jpg and Resume_Vinay_D.pdf in the same folder.
-Open index.html in a browser. Internet is needed for external fonts/icons/images and Typed.js.
+BEFORE PUBLISHING (fresher checklist)
+1. Add Resume_Vinay_D.pdf (1 page, one font, no photo) next to index.html.
+2. In script.js, set GITHUB_PROFILE to your profile URL and paste each project's real repo URL into "repo".
+3. In index.html, replace the GitHub social link with your real profile URL.
+4. Only keep skills you can explain in an interview; delete the rest from SKILL_GROUPS.
+5. Add real measurable results to the Experience section only if you actually measured them.
