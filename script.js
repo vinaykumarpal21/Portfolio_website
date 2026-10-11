@@ -62,21 +62,6 @@ const PROJECTS = [
     repo: '', // paste the real repo URL here; falls back to GITHUB_PROFILE while empty
   },
   {
-    title: 'Terraform AWS Infrastructure',
-    summary: 'Personal project: Terraform code that creates a VPC, EC2 Auto Scaling, load balancer, RDS and S3 on AWS.',
-    details: 'A personal learning project that provisions a small AWS environment with Terraform instead of clicking through the console, so it can be recreated the same way every time.',
-    problem: 'Creating cloud resources by hand is slow and hard to repeat.',
-    built: 'Terraform modules for a VPC with public and private subnets, an Application Load Balancer, EC2 Auto Scaling, RDS MySQL and S3, with remote state in S3 and DynamoDB locking.',
-    learned: 'Infrastructure as Code basics, Terraform modules and state, and core AWS networking.',
-    image: 'images/terraform-aws.svg',
-    tags: ['Terraform', 'AWS VPC', 'EC2', 'RDS', 'S3', 'ALB'],
-    tools: [
-      { name: 'Terraform', icon: ICON('terraform') },
-      { name: 'AWS',       icon: ICON('amazonwebservices', 'plain-wordmark'), invertInDark: true },
-    ],
-    repo: '', // paste the real repo URL here; falls back to GITHUB_PROFILE while empty
-  },
-  {
     title: 'Prometheus & Grafana Monitoring',
     summary: 'Personal project: a Docker Compose monitoring stack with dashboards and threshold alerts.',
     details: 'A personal learning project that monitors a host and its containers with Prometheus and Grafana, running everything with Docker Compose.',
