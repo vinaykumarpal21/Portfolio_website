@@ -1,3 +1,19 @@
+/* ==========================================================
+   STYLE.CSS - website ka design
+
+   Kahan kya hai (Ctrl+F karke section name search karo):
+   - :root / [data-theme="dark"]  -> colors (light aur dark mode)
+   - NAVBAR                       -> .header, .nav, .nav-menu
+   - HERO                         -> .hero (photo + typing text)
+   - SKILLS / SERVICES            -> .skill-card, .service-card
+   - PROJECT IMAGE                -> .project-thumb (image ka fixed size)
+   - MODAL                        -> Details popup
+   - CONTACT / FOOTER             -> form, social icons, footer
+   - @media                       -> mobile / tablet ke liye changes
+
+   Color badalna ho to sirf neeche :root me --primary-color badlo.
+   ========================================================== */
+
 :root {
   --bg-color: #f0f4f8;
   --text-color: #1e293b;
@@ -137,6 +153,7 @@ a, button, input, textarea, .card, .highlight-item, .service-card, .project-card
   100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
 }
 
+/* ---------- NAVBAR (top bar) ---------- */
 .header {
   position: fixed;
   top: 0;
@@ -220,6 +237,7 @@ section {
   padding-bottom: 1rem;
 }
 
+/* ---------- HERO (photo + intro) ---------- */
 .hero {
   display: flex;
   align-items: center;
@@ -358,6 +376,7 @@ section {
   border: 1px solid var(--border-color);
 }
 
+/* ---------- SKILLS ---------- */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -425,6 +444,7 @@ section {
   filter: invert(1);
 }
 
+/* ---------- SERVICES ---------- */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -569,6 +589,7 @@ section {
 }
 
 /* --- Project Tools Hover Removed --- */
+/* ---------- PROJECT CARD (tool icons, tags, buttons) ---------- */
 .project-tool-icons {
   display: flex;
   gap: 10px;
@@ -594,10 +615,12 @@ section {
   filter: invert(1);
 }
 
+/* Project box: desktop par max 520px, mobile par poori width */
 .project-container {
+  width: 100%;
   max-width: 520px;
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: clamp(0.8rem, 3vw, 1.5rem);
 }
 
 .carousel {
@@ -624,23 +647,28 @@ section {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ---------- PROJECT IMAGE (fixed shape on every screen) ----------
+   Image ka shape (5:3) hamesha same rehta hai - desktop, mobile ya window minimize.
+   Height fix nahi hai, aspect-ratio hai, isliye width chhoti ho to height apne aap
+   chhoti hoti hai aur image kabhi cut/crop nahi hoti. */
 .project-thumb {
   width: 100%;
-  height: 220px;
+  aspect-ratio: 5 / 3;          /* same as the SVG (600 x 360) */
   overflow: hidden;
-  background: rgba(237, 4, 4, 0.04);
-  border-radius: 12px 12px 0 0;
+  background: rgba(15, 23, 42, 0.06);
+  border-radius: 12px;
 }
 
 .project-thumb img {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;          /* contain = poori image dikhao, crop mat karo */
   transition: transform 0.5s ease;
 }
 
 .project-thumb img:hover {
-  transform: scale(1.08);
+  transform: scale(1.04);
 }
 
 .project-info {
@@ -704,6 +732,7 @@ section {
   margin-top: 1rem;
 }
 
+/* ---------- MODAL (Details popup) ---------- */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -758,6 +787,7 @@ section {
   cursor: pointer;
 }
 
+/* ---------- CONTACT ---------- */
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -984,6 +1014,8 @@ section {
   opacity: 0.65;
 }
 
+/* ---------- MOBILE / TABLET (@media) ----------
+   992px se chhoti screen = tablet, 768px se chhoti = mobile menu */
 @media(max-width: 992px) {
   .hero {
     flex-direction: column-reverse;

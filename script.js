@@ -1,12 +1,27 @@
 'use strict';
 
 /* ==========================================================
-   DATA
+   SCRIPT.JS  -  is file me sirf website ka behaviour hai.
+
+   Aap yahan se ye cheezein badal sakte ho:
+   1. SKILL_GROUPS    -> skills section
+   2. PROJECTS        -> projects section (sirf 2 projects rakhe hain)
+   3. TYPING_PHRASES  -> hero me jo text type hota hai
+   4. GITHUB_PROFILE  -> apna GitHub link
    ========================================================== */
+
+
+/* ==========================================================
+   1. DATA (content yahan likha hai)
+   ========================================================== */
+
+// Tool ka icon link banane ka chhota helper.
+// Example: ICON('docker') -> docker ka logo
 const ICON = (name, variant = 'original') =>
   `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${name}/${name}-${variant}.svg`;
 
-// Every tool appears once. Duplicates are also removed in code (see renderSkills).
+// Skills: har group me title, icon aur tools ki list.
+// Same tool 2 baar likha ho to code usse khud hata deta hai.
 const SKILL_GROUPS = [
   {
     title: 'DevOps & CI/CD Tools',
@@ -23,6 +38,7 @@ const SKILL_GROUPS = [
     title: 'Cloud, OS & Monitoring',
     icon: 'fa-solid fa-cloud',
     tools: [
+      // invertInDark: true = dark mode me logo ka color ulta (white) ho jata hai
       { name: 'AWS',        icon: ICON('amazonwebservices', 'plain-wordmark'), invertInDark: true },
       { name: 'Linux',      icon: ICON('linux') },
       { name: 'Bash',       icon: ICON('bash') },
@@ -43,30 +59,34 @@ const SKILL_GROUPS = [
   },
 ];
 
+// Projects: sirf 2 projects.
+// Naya project add karna ho to ek { ... } block copy karke yahan paste karo.
 const PROJECTS = [
   {
-    title: 'Jenkins CI/CD Pipeline Automation',
-    summary: 'Personal project: a Jenkins pipeline that pulls code from GitHub, builds a Docker image and deploys it to AWS EC2.',
-    details: 'A personal learning project that automates build and deployment of a sample application using a Jenkinsfile, Docker and AWS EC2, triggered from a GitHub repository.',
+    // ---------- Project 1: End-to-end CI/CD ----------
+    title: 'End-to-End CI/CD Pipeline (GitHub to AWS EC2)',
+    summary: 'Personal project: every push to GitHub triggers Jenkins, which builds a Docker image and deploys it automatically to AWS EC2.',
+    details: 'A personal project that automates the full journey of an application: from a git push on GitHub to a running Docker container on an AWS EC2 server, with no manual steps.',
     problem: 'Manual builds and deployments are slow and easy to get wrong.',
-    built: 'A Jenkins pipeline that pulls code from GitHub, builds a Docker image and deploys the container to an AWS EC2 instance.',
-    learned: 'Writing pipelines as code, Docker image builds, and how a failed stage stops a bad release.',
+    built: 'A GitHub webhook triggers a Jenkins pipeline (Jenkinsfile). It builds a Docker image, pushes it to Docker Hub, then connects to the EC2 server over SSH and runs the new container.',
+    learned: 'Writing pipelines as code, Docker image builds, SSH deployment to EC2, and how a failed stage stops a bad release.',
     image: 'images/jenkins-pipeline.svg',
-    tags: ['GitHub', 'Docker', 'Jenkins', 'AWS EC2'],
+    tags: ['GitHub', 'Jenkins', 'Docker', 'AWS EC2'],
     tools: [
       { name: 'GitHub',  icon: ICON('github'), invertInDark: true },
-      { name: 'Docker',  icon: ICON('docker') },
       { name: 'Jenkins', icon: ICON('jenkins') },
+      { name: 'Docker',  icon: ICON('docker') },
       { name: 'AWS EC2', icon: ICON('amazonwebservices', 'plain-wordmark'), invertInDark: true },
     ],
-    repo: '', // paste the real repo URL here; falls back to GITHUB_PROFILE while empty
+    repo: '', // yahan project ka asli GitHub link daalo. Khali raha to GITHUB_PROFILE khulega.
   },
   {
+    // ---------- Project 2: Monitoring ----------
     title: 'Prometheus & Grafana Monitoring',
-    summary: 'Personal project: a Docker Compose monitoring stack with dashboards and threshold alerts.',
-    details: 'A personal learning project that monitors a host and its containers with Prometheus and Grafana, running everything with Docker Compose.',
+    summary: 'Personal project: a Docker Compose monitoring stack with dashboards and threshold alerts for a server and its containers.',
+    details: 'A personal project that monitors a server and its containers using Prometheus and Grafana. Everything starts with one Docker Compose command.',
     problem: 'Without monitoring, problems are noticed only after something breaks.',
-    built: 'Prometheus scraping Node Exporter and cAdvisor, Grafana dashboards for CPU, memory, disk and container health, and AlertManager email alerts on thresholds.',
+    built: 'Prometheus collects metrics from Node Exporter (server) and cAdvisor (containers). Grafana shows CPU, memory, disk and container dashboards. AlertManager sends email alerts when a limit is crossed.',
     learned: 'How metrics are collected and queried, building dashboards, and setting alert rules.',
     image: 'images/monitoring-stack.svg',
     tags: ['Prometheus', 'Grafana', 'AlertManager', 'Docker Compose'],
@@ -75,18 +95,23 @@ const PROJECTS = [
       { name: 'Grafana',    icon: ICON('grafana') },
       { name: 'Docker',     icon: ICON('docker') },
     ],
-    repo: '', // paste the real repo URL here; falls back to GITHUB_PROFILE while empty
+    repo: '', // yahan project ka asli GitHub link daalo.
   },
 ];
 
-// Used by any project whose own `repo` is empty. Replace with your real profile URL.
+// Jis project ka `repo` khali hai, uska GitHub button yahi link kholega.
 const GITHUB_PROFILE = 'https://github.com';
 
+// Hero section me jo lines type hoti hain.
 const TYPING_PHRASES = ['an Aspiring DevOps Engineer', 'a DevOps Intern', 'a Cloud & CI/CD Learner'];
 
+
 /* ==========================================================
-   HELPERS
+   2. HELPERS (chhote kaam ke functions)
    ========================================================== */
+
+// el() = HTML element banane ka short tareeka.
+// Example: el('p', { text: 'Hello' }) -> <p>Hello</p>
 function el(tag, props = {}, children = []) {
   const node = document.createElement(tag);
   Object.entries(props).forEach(([key, value]) => {
@@ -98,21 +123,25 @@ function el(tag, props = {}, children = []) {
   return node;
 }
 
+// Tool ka logo (<img>) banata hai.
 function toolImg(tool) {
   const img = el('img', { src: tool.icon, alt: tool.name, loading: 'lazy' });
   if (tool.invertInDark) img.classList.add('invert-dark');
   return img;
 }
 
+
 /* ==========================================================
-   SKILLS (names + icons only, no percentages, no duplicates)
+   3. SKILLS SECTION
    ========================================================== */
 function renderSkills() {
   const grid = document.getElementById('skillsGrid');
   if (!grid) return;
-  const seen = new Set();
+
+  const seen = new Set(); // jo tool dikh chuka hai uska naam yahan rakhte hain
 
   SKILL_GROUPS.forEach(group => {
+    // Duplicate tools hatao, phir har tool ka card banao
     const cards = group.tools
       .filter(tool => {
         const key = tool.name.toLowerCase();
@@ -126,6 +155,7 @@ function renderSkills() {
       ]));
 
     if (!cards.length) return;
+
     grid.append(el('div', { class: 'card glass skill-group' }, [
       el('h3', {}, [el('i', { class: group.icon, 'aria-hidden': 'true' }), ` ${group.title}`]),
       el('div', { class: 'skill-cards' }, cards),
@@ -133,17 +163,20 @@ function renderSkills() {
   });
 }
 
+
 /* ==========================================================
-   PROJECTS + MODAL + CAROUSEL
+   4. PROJECTS SECTION (cards + Details popup + Next/Previous)
    ========================================================== */
 const modal = document.getElementById('detailsModal');
 const modalBody = document.getElementById('modalBodyContent');
 const closeModalBtn = document.getElementById('closeModalBtn');
-let lastFocused = null;
+let lastFocused = null; // popup band hone par focus wapas yahin aayega
 
+// "Details" dabane par popup kholo
 function openModal(project) {
   if (!modal || !modalBody) return;
   lastFocused = document.activeElement;
+
   modalBody.replaceChildren(
     el('h2', { text: project.title }),
     el('p', { text: project.details }),
@@ -156,12 +189,14 @@ function openModal(project) {
     el('h3', { text: 'Technologies Used' }),
     el('div', { class: 'tech-tags' }, project.tags.map(t => el('span', { text: t }))),
   );
+
   modal.classList.add('active');
   modal.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('modal-open');
+  document.body.classList.add('modal-open'); // peeche ka page scroll band
   closeModalBtn?.focus();
 }
 
+// Popup band karo
 function closeModal() {
   if (!modal) return;
   modal.classList.remove('active');
@@ -170,6 +205,7 @@ function closeModal() {
   lastFocused?.focus?.();
 }
 
+// PROJECTS list se cards banao aur Next/Previous chalao
 function renderProjects() {
   const carousel = document.getElementById('projectCarousel');
   const prevBtn = document.getElementById('prevProjBtn');
@@ -177,13 +213,17 @@ function renderProjects() {
   const counter = document.getElementById('projCounter');
   if (!carousel) return;
 
+  // Har project ke liye ek card
   const cards = PROJECTS.map(project => {
     const detailsBtn = el('button', { type: 'button', class: 'btn btn-sm btn-primary view-details' },
       [el('i', { class: 'fa-solid fa-circle-info', 'aria-hidden': 'true' }), ' Details']);
     detailsBtn.addEventListener('click', () => openModal(project));
 
     return el('article', { class: 'project-card' }, [
-      el('div', { class: 'project-thumb' }, [el('img', { src: project.image, alt: `${project.title} diagram` })]),
+      // Image ka size CSS (.project-thumb) sambhalta hai, isliye har screen par same rehta hai
+      el('div', { class: 'project-thumb' }, [
+        el('img', { src: project.image, alt: `${project.title} diagram` }),
+      ]),
       el('div', { class: 'project-info' }, [
         el('h3', { text: project.title }),
         el('p', { text: project.summary }),
@@ -199,30 +239,34 @@ function renderProjects() {
   });
   carousel.replaceChildren(...cards);
 
+  // Ek time par sirf ek card dikhao (index = kaun sa card)
   let current = 0;
   const show = index => {
-    current = (index + cards.length) % cards.length;
+    current = (index + cards.length) % cards.length; // last ke baad phir pehla
     cards.forEach((card, i) => {
       card.classList.toggle('active', i === current);
       card.setAttribute('aria-hidden', String(i !== current));
     });
     if (counter) counter.textContent = `${current + 1} / ${cards.length}`;
   };
+
   prevBtn?.addEventListener('click', () => show(current - 1));
   nextBtn?.addEventListener('click', () => show(current + 1));
   show(0);
 }
 
+
 /* ==========================================================
-   THEME + MOBILE MENU
+   5. DARK / LIGHT THEME
    ========================================================== */
 function initTheme() {
   const root = document.documentElement;
   const btn = document.getElementById('themeToggle');
 
+  // Theme lagao, button ka icon badlo aur browser me yaad rakho
   const apply = theme => {
     root.setAttribute('data-theme', theme);
-    try { localStorage.setItem('theme', theme); } catch (_) { /* storage unavailable */ }
+    try { localStorage.setItem('theme', theme); } catch (_) { /* storage band ho to koi dikkat nahi */ }
     if (!btn) return;
     const dark = theme === 'dark';
     btn.innerHTML = `<i class="fa-solid ${dark ? 'fa-sun' : 'fa-moon'}" aria-hidden="true"></i>`;
@@ -230,17 +274,24 @@ function initTheme() {
     btn.title = dark ? 'Switch to light mode' : 'Switch to dark mode';
   };
 
+  // Pehle se saved theme padho (nahi mila to light)
   let saved = 'light';
   try { saved = localStorage.getItem('theme') || 'light'; } catch (_) { /* ignore */ }
   apply(saved === 'dark' ? 'dark' : 'light');
+
   btn?.addEventListener('click', () => apply(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
 }
 
+
+/* ==========================================================
+   6. MOBILE MENU (hamburger button)
+   ========================================================== */
 function initMenu() {
   const menuBtn = document.getElementById('menuToggle');
   const navMenu = document.getElementById('navMenu');
   if (!menuBtn || !navMenu) return;
 
+  // Menu kholo (true) ya band karo (false)
   const setOpen = open => {
     navMenu.classList.toggle('active', open);
     menuBtn.setAttribute('aria-expanded', String(open));
@@ -253,15 +304,25 @@ function initMenu() {
     e.stopPropagation();
     setOpen(!navMenu.classList.contains('active'));
   });
+
+  // Menu ke bahar click karo -> menu band
   document.addEventListener('click', e => {
     if (!navMenu.contains(e.target) && !menuBtn.contains(e.target)) setOpen(false);
   });
+
+  // Menu ka link dabao -> menu band
   navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+
+  // Esc dabao -> menu aur popup dono band
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') { setOpen(false); closeModal(); }
   });
 }
 
+
+/* ==========================================================
+   7. SCROLL SPY (scroll karte time menu me current section highlight)
+   ========================================================== */
 function initScrollSpy() {
   const links = [...document.querySelectorAll('.nav-menu a[href^="#"]')];
   const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
@@ -273,34 +334,36 @@ function initScrollSpy() {
       links.forEach(a => a.classList.toggle('is-current', a.getAttribute('href') === `#${entry.target.id}`));
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
+
   sections.forEach(s => observer.observe(s));
 }
 
+
 /* ==========================================================
-   TYPING ANIMATION (fixed-size box so layout never shifts)
+   8. TYPING ANIMATION (hero ka typing text)
    ========================================================== */
 function initTyping() {
   const target = document.getElementById('typing-text');
   if (!target) return;
 
-  let phraseIndex = 0;
-  let charIndex = 0;
-  let deleting = false;
+  let phraseIndex = 0;   // kaun si line chal rahi hai
+  let charIndex = 0;     // kitne letters dikh rahe hain
+  let deleting = false;  // true = letters mit rahe hain
 
   const tick = () => {
     const phrase = TYPING_PHRASES[phraseIndex];
     target.textContent = phrase.slice(0, charIndex);
-    let delay = deleting ? 45 : 85;
+    let delay = deleting ? 45 : 85; // milliseconds
 
     if (!deleting && charIndex < phrase.length) {
-      charIndex++;
+      charIndex++;                         // ek letter aur likho
     } else if (deleting && charIndex > 0) {
-      charIndex--;
+      charIndex--;                         // ek letter mitao
     } else if (!deleting) {
-      deleting = true;
+      deleting = true;                     // line poori likh gayi, thoda ruko
       delay = 1400;
     } else {
-      deleting = false;
+      deleting = false;                    // line mit gayi, agli line shuru
       phraseIndex = (phraseIndex + 1) % TYPING_PHRASES.length;
       delay = 350;
     }
@@ -311,7 +374,7 @@ function initTyping() {
 
 
 /* ==========================================================
-   CONTACT FORM (sends in the background, stays on the page)
+   9. CONTACT FORM (page chhode bina message bhejta hai)
    ========================================================== */
 function initContactForm() {
   const form = document.getElementById('contactForm');
@@ -324,6 +387,7 @@ function initContactForm() {
   const defaultLabel = label.textContent;
   let hideTimer;
 
+  // Success ya error box 5 second dikhao, phir chhupa do
   const showMessage = box => {
     success.hidden = true;
     error.hidden = true;
@@ -333,13 +397,14 @@ function initContactForm() {
   };
 
   form.addEventListener('submit', async event => {
-    event.preventDefault(); // never navigate away from the page
-    if (!form.reportValidity()) return;
+    event.preventDefault();               // page reload nahi hone dena
+    if (!form.reportValidity()) return;   // khali field ho to browser khud bata dega
 
     sendBtn.disabled = true;
     label.textContent = 'Sending...';
 
     try {
+      // Formspree ko form ka data bhejo
       const response = await fetch(form.action, {
         method: 'POST',
         body: new FormData(form),
@@ -358,8 +423,9 @@ function initContactForm() {
   });
 }
 
+
 /* ==========================================================
-   INIT
+   10. START (page load hote hi sab chalu)
    ========================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
@@ -370,5 +436,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initTyping();
   initContactForm();
   closeModalBtn?.addEventListener('click', closeModal);
-  modal?.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  modal?.addEventListener('click', e => { if (e.target === modal) closeModal(); }); // popup ke bahar click
 });
